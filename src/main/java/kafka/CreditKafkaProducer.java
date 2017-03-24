@@ -18,7 +18,7 @@ public class CreditKafkaProducer {
 
     // Set the default stream and topic to publish to.
     String topic = "credit";
-    String fileName = "/Users/Chengfeng/Cask/CreditRisk/data/stream.csv";
+    String fileName = "/Users/Chengfeng/Cask/SparkCredit/data/stream.csv";
 
     if (args.length == 2) {
       topic = args[0];

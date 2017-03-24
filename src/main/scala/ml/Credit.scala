@@ -40,7 +40,7 @@ object Credit {
     val sqlContext = new SQLContext(sc)
     import sqlContext.implicits._
 
-    val creditDF = parseRDD(sc.textFile("/Users/Chengfeng/Cask/CreditRisk/data/german_credit.csv"))
+    val creditDF = parseRDD(sc.textFile("/Users/Chengfeng/Cask/SparkCredit/data/german_credit.csv"))
       .map(parseCredit).toDF().cache()
 //    creditDF.registerTempTable("credit")
 //    creditDF.printSchema
@@ -66,7 +66,7 @@ object Credit {
     val Array(trainingData, testData) = labelFeatureDF.randomSplit(Array(0.7, 0.3), splitSeed)
     val numIterations = 20
     val model = SVMWithSGD.train(trainingData, numIterations, 1, 1.0)
-    model.save(sc, "/Users/Chengfeng/Cask/CreditRisk/model/svm_model")
+    model.save(sc, "/Users/Chengfeng/Cask/SparkCredit/model/svm_model")
 
     // Clear the default threshold to output raw scores
     model.clearThreshold()

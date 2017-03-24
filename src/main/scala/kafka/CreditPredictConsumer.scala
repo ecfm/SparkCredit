@@ -1,5 +1,4 @@
 package kafka
-// http://maprdocs.mapr.com/home/Spark/Spark_IntegrateMapRStreams.html
 
 import kafka.serializer.StringDecoder
 import ml.Credit._
@@ -14,16 +13,15 @@ import org.apache.spark.streaming.kafka.KafkaUtils
 import org.apache.spark.streaming.{Seconds, StreamingContext}
 
 /**
-  * Consumes messages from a topic in MapR Streams using the Kafka interface,
-  * enriches the message with  the k-means model cluster id and publishs the result in json format
-  * to another topic
-  * Usage: SparkKafkaConsumerProducer  <model> <topicssubscribe> <topicspublish>
+  * Consumes messages from a topic in Kafka and enriches the message with the SVM classification
+  *
+  * Usage: CreditPredictConsumer  <model> <topics>
   *
   *   <model>  is the path to the saved model
-  *   <topics> is a  topic to consume from
+  *   <topics> is a topic to consume from
   * Example:
-  *    $  spark-submit --class com.sparkkafka.uber.SparkKafkaConsumerProducer --master local[2] \
-  * mapr-sparkml-streaming-uber-1.0.jar /user/user01/data/savemodel  /user/user01/stream:ubers /user/user01/stream:uberp
+  *    $  spark-submit --class kafka.CreditPredictConsumer --master local[2] \
+  * spark-credit-1.0-SNAPSHOT.jar /user/user01/data/savemodel  /user/user01/stream:ubers /user/user01/stream:uberp
   *
   *    for more information
   *    http://maprdocs.mapr.com/home/Spark/Spark_IntegrateMapRStreams_Consume.html
